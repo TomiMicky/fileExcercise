@@ -23,6 +23,30 @@ public class FileHandler {
         if (!Files.exists(path)) {
             Files.createFile(path);
         }
-        List<String> myContacts = Files.readAllLines(path); // retrieve contact from myContacts
+        List<String> myContacts = new ArrayList<>();
+//        myContacts.add("coffee,3");
+//        myContacts.add("tea,4");
 
-}}
+
+        // serialization  object -> text / deserialization text -> object
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter contacts name here: ");
+        String myContactsName = scanner.nextLine();
+        System.out.println("Enter contacts number here:");
+        String phoneNumber = scanner.nextLine();
+        myContacts.add(myContactsName + "," + phoneNumber);
+
+        Files.write(path, myContacts, StandardOpenOption.APPEND);  // write several lines to a file
+
+        List<String> myFriendsNameAndNumber = Files.readAllLines(path); // read all the lines from a file
+
+
+//        for (String myContacts: myFriendsNameAndNumber) {
+//            String[] parts = myContacts.split(",");
+//
+//            System.out.println("Item: " + parts[0] + ", Quantity: " + parts[1]);
+//            //System.out.println(grocery.replace(",", " - "));
+//        }
+  }
+}
