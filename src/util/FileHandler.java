@@ -40,13 +40,15 @@ public class FileHandler {
         Files.write(path, myContacts, StandardOpenOption.APPEND);  // write several lines to a file
 
         List<String> myFriendsNameAndNumber = Files.readAllLines(path); // read all the lines from a file
+        //System.out.println(myFriendsNameAndNumber);
+
+        for (String names: myFriendsNameAndNumber) {
+            String[] numbers = names.split(",");
+            //System.out.println(Arrays.toString(numbers));
+            System.out.println("Name: " + numbers[0] + " Phone Number: "  + numbers[1]);
+            //System.out.println(grocery.replace(",", " - "));
+        }
 
 
-//        for (String myContacts: myFriendsNameAndNumber) {
-//            String[] parts = myContacts.split(",");
-//
-//            System.out.println("Item: " + parts[0] + ", Quantity: " + parts[1]);
-//            //System.out.println(grocery.replace(",", " - "));
-//        }
   }
 }
