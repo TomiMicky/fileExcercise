@@ -3,19 +3,22 @@ package util;
 import java.nio.file.*;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
-
 
 public class FileHandler {
+
     private String directory;
     private String fileName;
-    public static void main(String[] args) throws IOException {
-        // Path to resources/info.txt
-        Path path = Paths.get("Contacts", "ContactInfo.txt"); // files
-        System.out.println(path.toAbsolutePath());
+    private Path path;
+
+    public FileHandler(String directory, String fileName) throws IOException {
+        this.directory = directory;
+        this.fileName = fileName;
+        this.createFile();
+    }
+
+    private void createFile() throws IOException {
+        this.path = Paths.get(this.directory, this.fileName); // files
 
         if (!Files.exists(path.getParent())) {
             Files.createDirectory(path.getParent());
@@ -23,32 +26,15 @@ public class FileHandler {
         if (!Files.exists(path)) {
             Files.createFile(path);
         }
-        List<String> myContacts = new ArrayList<>();
-//        myContacts.add("coffee,3");
-//        myContacts.add("tea,4");
+    }
+
+    public List<String> readAllContents() throws IOException {
+        return Files.readAllLines(this.path);
+    }
+
+    public void writeToFile(List<String> contents) throws IOException {
+        Files.write(this.path, contents, StandardOpenOption.APPEND);  // write several lines to a file
+    }
 
 
-        // serialization  object -> text / deserialization text -> object
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter contacts name here: ");
-        String myContactsName = scanner.nextLine();
-        System.out.println("Enter contacts number here:");
-        String phoneNumber = scanner.nextLine();
-        myContacts.add(myContactsName + "," + phoneNumber);
-
-        Files.write(path, myContacts, StandardOpenOption.APPEND);  // write several lines to a file
-
-        List<String> myFriendsNameAndNumber = Files.readAllLines(path); // read all the lines from a file
-        //System.out.println(myFriendsNameAndNumber);
-
-        for (String names: myFriendsNameAndNumber) {
-            String[] numbers = names.split(",");
-            //System.out.println(Arrays.toString(numbers));
-            System.out.println("Name: " + numbers[0] + " Phone Number: "  + numbers[1]);
-            //System.out.println(grocery.replace(",", " - "));
-        }
-
-
-  }
 }
