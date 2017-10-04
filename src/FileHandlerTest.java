@@ -27,7 +27,6 @@ public class FileHandlerTest {
         printAllContacts(contactsFile);
 
 
-
     }
 
     public static void printAllContacts(FileHandler contactsFile) throws IOException {
