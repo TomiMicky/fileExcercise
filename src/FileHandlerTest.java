@@ -13,27 +13,33 @@ public class FileHandlerTest {
 //        FileHandler logFile = new FileHandler("logs","todays-log.txt");
         List<String> myContacts = new ArrayList<>();
 
-        System.out.println("1. View contacts.\n" + "2. Add a new contact.\n" +
-                "3. Search a contact by name.\n" + "4. Delete an existing " +
-                "contact.\n" + "5. Exit.\n" + "Enter an option (1, 2, 3, 4 or 5):");
-        int option = input.getInt();
-        switch (option) {
-            case 1:
-                printAllContacts(contactsFile);
-                break;
-            case 2:
-                addContact(contactsFile);
-                break;
-            case 3:
-                searchContactsName(contactsFile);
-                break;
-            case 4:
-                deleteExistContact(contactsFile);
-                break;
-            case 5:
-                exit(contactsFile);
-                break;
-        }
+        do {
+            System.out.println("1. View contacts.\n" + "2. Add a new contact.\n" +
+                    "3. Search a contact by name.\n" + "4. Delete an existing " +
+                    "contact.\n" + "5. Exit.\n" + "Enter an option (1, 2, 3, 4 or 5):");
+            int option = input.getInt();
+
+            switch (option) {
+                case 1:
+                    printAllContacts(contactsFile);
+                    break;
+                case 2:
+                    addContact(contactsFile);
+                    break;
+                case 3:
+                    searchContactsName(contactsFile);
+                    break;
+                case 4:
+                    deleteExistContact(contactsFile);
+                    break;
+                case 5:
+                    exit(contactsFile);
+                    break;
+
+            }
+        }while(input.yesNo("Would you like to continue? (y/n)"));
+
+        System.out.println("Goodbye, and have a wonderful day!");
     }
     private static void printAllContacts(FileHandler contactsFile) throws IOException {
 
