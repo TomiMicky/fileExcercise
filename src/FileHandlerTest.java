@@ -1,38 +1,38 @@
 import util.FileHandler;
-
-import java.io.File;
+import util.Input;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class FileHandlerTest {
+   static Input input = new Input();
     public static void main(String[] args) throws IOException {
-        // Path to resources/info.txt
         FileHandler contactsFile = new FileHandler("contacts", "contacts.txt");
 //        FileHandler logFile = new FileHandler("logs","todays-log.txt");
         List<String> myContacts = new ArrayList<>();
 
-        // serialization  object -> text / deserialization text -> object
+        System.out.println("1. View contacts.\n" + "2. Add a new contact.\n" +
+                "3. Search a contact by name.\n" + "4. Delete an existing " +
+                "contact.\n" + "5. Exit.\n" + "Enter an option (1, 2, 3, 4 or 5):");
+//        switch (myContacts){
+//
+//            case :
+//
+//                break;
+//
+//        }
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter contacts name here: ");
-        String myContactsName = scanner.nextLine();
-        System.out.println("Enter contacts number here:");
-        String phoneNumber = scanner.nextLine();
+        String myContactsName = input.getString("Enter contacts name here:");
+        String phoneNumber = input.getString("Enter contacts number here:");
         myContacts.add(myContactsName + "," + phoneNumber);
 
         contactsFile.writeToFile(myContacts);
 
         printAllContacts(contactsFile);
-
-
-
     }
 
     public static void printAllContacts(FileHandler contactsFile) throws IOException {
         List<String> myFriendsNameAndNumber = contactsFile.readAllContents(); // read all the lines from a file
-
 
         for (String names: myFriendsNameAndNumber) {
             String[] numbers = names.split(",");
