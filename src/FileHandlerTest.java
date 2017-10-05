@@ -31,6 +31,7 @@ public class FileHandlerTest {
                 deleteExistContact(contactsFile);
                 break;
             case 5:
+                exit(contactsFile);
                 break;
         }
     }
@@ -40,7 +41,7 @@ public class FileHandlerTest {
 
         for (String names : myFriendsNameAndNumber) {
 //            String[] numbers = names.split(",");
-            System.out.println(" Name: " + names);
+            System.out.println(names + "\n");
         }
     }
     private static void addContact(FileHandler contactsFile) throws IOException {
@@ -62,7 +63,7 @@ public class FileHandlerTest {
     }
     public static void deleteExistContact(FileHandler contactFile) throws IOException {
         List<String> myContacts = contactFile.readAllContents();
-        String deleteMyContactsName = input.getString("Delete contact name: ");
+        String deleteMyContactsName = input.getString("Delete contact: ");
         for (String delete : myContacts) {
             if (delete.contains(deleteMyContactsName)) {
                 myContacts.remove(myContacts.indexOf(delete));
@@ -70,5 +71,15 @@ public class FileHandlerTest {
         }
         contactFile.writeToFile(myContacts, false);
     }
-}
+
+    public static void exit(FileHandler  contactFile) throws IOException{
+       List<String> myContacts = contactFile.readAllContents();
+       String exit = input.getString("Good bye!");
+            if (exit.contains(exit)) {
+//                myContacts.remove(myContacts.indexOf(delete));
+                System.out.println(exit);
+            }
+        }
+    }
+
 
