@@ -33,14 +33,15 @@ public class FileHandlerTest {
                     deleteExistContact(contactsFile);
                     break;
                 case 5:
-                    exit(contactsFile);
+                    System.out.println("Goodbye");
+                    System.exit(0);
                     break;
-
             }
-        }while(input.yesNo("Would you like to continue? (y/n)"));
+        } while (input.yesNo("Would you like to continue? (y/n)"));
 
         System.out.println("Goodbye, and have a wonderful day!");
     }
+
     private static void printAllContacts(FileHandler contactsFile) throws IOException {
 
         List<String> myFriendsNameAndNumber = contactsFile.readAllContents();
@@ -50,6 +51,7 @@ public class FileHandlerTest {
             System.out.println(names + "\n");
         }
     }
+
     private static void addContact(FileHandler contactsFile) throws IOException {
         List<String> myContacts = new ArrayList();
         String myContactsName = input.getString("Enter contacts name here:");
@@ -58,34 +60,36 @@ public class FileHandlerTest {
 
         contactsFile.writeToFile(myContacts, true);
     }
-    private static void searchContactsName(FileHandler contactFile) throws IOException{
+
+    private static void searchContactsName(FileHandler contactFile) throws IOException {
         List<String> myContacts = contactFile.readAllContents();
         String myContactsName = input.getString("Search contact name: ");
-        for (String contact: myContacts) {
+        for (String contact : myContacts) {
             if (contact.contains(myContactsName)) {
                 System.out.println(contact);
             }
         }
     }
+
     public static void deleteExistContact(FileHandler contactFile) throws IOException {
         List<String> myContacts = contactFile.readAllContents();
         String deleteMyContactsName = input.getString("Delete contact: ");
         for (String delete : myContacts) {
             if (delete.contains(deleteMyContactsName)) {
                 myContacts.remove(myContacts.indexOf(delete));
+                break;
             }
         }
         contactFile.writeToFile(myContacts, false);
     }
 
-    public static void exit(FileHandler  contactFile) throws IOException{
-       List<String> myContacts = contactFile.readAllContents();
-       String exit = input.getString("Good bye!");
-            if (exit.contains(exit)) {
-//                myContacts.remove(myContacts.indexOf(delete));
-                System.out.println(exit);
-            }
-        }
-    }
+//    public static void exit(FileHandler contactFile) throws IOException {
+//        List<String> myContacts = contactFile.readAllContents();
+//        String exit = input.getString("Good bye!");
+//        if (exit.contains(exit)) {
+//            System.out.println(exit);
+//        }
+//    }
+}
 
 
