@@ -16,6 +16,7 @@ public class FileHandler {
         this.fileName = fileName;
         this.createFile();
     }
+
     private void createFile() throws IOException {
         this.path = Paths.get(this.directory, this.fileName); // files
 
@@ -26,11 +27,14 @@ public class FileHandler {
             Files.createFile(path);
         }
     }
+
     public List<String> readAllContents() throws IOException {
         return Files.readAllLines(this.path);
     }
+
     public void writeToFile(List<String> contents) throws IOException {
         Files.write(this.path, contents, StandardOpenOption.APPEND);  // write several lines to a file
     }
+
 
 }
