@@ -28,35 +28,47 @@ public class FileHandlerTest {
                 searchContactsName(contactsFile);
                 break;
             case 4:
+                deleteExistContact(contactsFile);
+                break;
+            case 5:
                 break;
         }
     }
-
-
     private static void printAllContacts(FileHandler contactsFile) throws IOException {
 
-        List<String> myFriendsNameAndNumber = contactsFile.readAllContents(); // read all the lines from a file
+        List<String> myFriendsNameAndNumber = contactsFile.readAllContents();
 
         for (String names : myFriendsNameAndNumber) {
-            String[] numbers = names.split(",");
-            System.out.println(" Name: " + numbers[0] + " | Phone Number: " + numbers[1] + "\n");
+//            String[] numbers = names.split(",");
+            System.out.println(" Name: " + names);
         }
     }
     private static void addContact(FileHandler contactsFile) throws IOException {
-        List myContacts = new ArrayList();
+        List<String> myContacts = new ArrayList();
         String myContactsName = input.getString("Enter contacts name here:");
         String phoneNumber = input.getString("Enter contacts number here:");
         myContacts.add(myContactsName + " , " + phoneNumber);
 
-        contactsFile.writeToFile(myContacts);
+        contactsFile.writeToFile(myContacts, true);
     }
     private static void searchContactsName(FileHandler contactFile) throws IOException{
         List<String> myContacts = contactFile.readAllContents();
         String myContactsName = input.getString("Search contact name: ");
-        for (String contact: myContacts){
-            if(contact.contains(myContactsName)){
+        for (String contact: myContacts) {
+            if (contact.contains(myContactsName)) {
                 System.out.println(contact);
             }
         }
     }
+    public static void deleteExistContact(FileHandler contactFile) throws IOException {
+        List<String> myContacts = contactFile.readAllContents();
+        String deleteMyContactsName = input.getString("Delete contact name: ");
+        for (String delete : myContacts) {
+            if (delete.contains(deleteMyContactsName)) {
+                myContacts.remove(myContacts.indexOf(delete));
+            }
+        }
+        contactFile.writeToFile(myContacts, false);
+    }
 }
+
