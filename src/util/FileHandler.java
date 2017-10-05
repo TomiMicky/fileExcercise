@@ -32,8 +32,12 @@ public class FileHandler {
         return Files.readAllLines(this.path);
     }
 
-    public void writeToFile(List<String> contents) throws IOException {
-        Files.write(this.path, contents, StandardOpenOption.APPEND);  // write several lines to a file
+    public void writeToFile(List<String> contents, boolean append) throws IOException {
+        if(append){
+            Files.write(this.path, contents, StandardOpenOption.APPEND);  // write several lines to a file
+        } else {
+            Files.write(this.path, contents);
+        }
     }
 
 
