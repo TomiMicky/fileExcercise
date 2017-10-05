@@ -25,12 +25,15 @@ public class FileHandlerTest {
                 addContact(contactsFile);
                 break;
             case 3:
+                searchContactsName(contactsFile);
+                break;
+            case 4:
                 break;
         }
-
     }
 
-    public static void printAllContacts(FileHandler contactsFile) throws IOException {
+
+    private static void printAllContacts(FileHandler contactsFile) throws IOException {
 
         List<String> myFriendsNameAndNumber = contactsFile.readAllContents(); // read all the lines from a file
 
@@ -38,10 +41,8 @@ public class FileHandlerTest {
             String[] numbers = names.split(",");
             System.out.println(" Name: " + numbers[0] + " | Phone Number: " + numbers[1] + "\n");
         }
-
     }
-
-    public static void addContact(FileHandler contactsFile) throws IOException {
+    private static void addContact(FileHandler contactsFile) throws IOException {
         List myContacts = new ArrayList();
         String myContactsName = input.getString("Enter contacts name here:");
         String phoneNumber = input.getString("Enter contacts number here:");
@@ -49,11 +50,13 @@ public class FileHandlerTest {
 
         contactsFile.writeToFile(myContacts);
     }
-//    public static void searchContactsName() throws IOException{
-//        List myContacts = new ArrayList();
-//        String myContactsName = input.getString("Search contact name: ");
-//        String phoneNumber = input.getString("Enter phone numbver here: ");
-//        myContacts.set(searchContactsName() + );
-//
-//    }
+    private static void searchContactsName(FileHandler contactFile) throws IOException{
+        List<String> myContacts = contactFile.readAllContents();
+        String myContactsName = input.getString("Search contact name: ");
+        for (String contact: myContacts){
+            if(contact.contains(myContactsName)){
+                System.out.println(contact);
+            }
+        }
+    }
 }
