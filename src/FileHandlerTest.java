@@ -43,16 +43,19 @@ import java.util.List;
             System.out.println(names + "\n");
         }
     }
-
     private static void addContact(FileHandler contactsFile) throws IOException {
         String phoneNumber;
         List<String> myContacts = new ArrayList();
         String myContactsName = input.getString("Enter contacts name here:");
-         phoneNumber = input.getString("Enter contacts number here:");
-        myContacts.add(myContactsName + " , " + "(" + phoneNumber.substring(0,3)
+        phoneNumber = input.getString("Enter contacts number here:");
+        myContacts.add(myContactsName + " - " + "(" + phoneNumber.substring(0, 3)
                 + ")" + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6));
         contactsFile.writeToFile(myContacts, true);
+        if (myContactsName.equals(input)) {
+            System.out.println("There's already a contact named" + myContacts + "Do you want to overwrite it?");
+        }
     }
+
     private static void searchContactsName(FileHandler contactFile) throws IOException {
         List<String> myContacts = contactFile.readAllContents();
         String myContactsName = input.getString("Search contact name: ");
